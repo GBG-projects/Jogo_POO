@@ -15,7 +15,9 @@ class Personagem
       this.pulando = false;
       this.gravidade = 0.5;
       this.alturaLevantado = altura;
-      this.alturaAgachado = altura/1.75;
+      this.alturaAgachado = altura/1.7;
+      this.itemPegado = false;
+      this.inventario = [];
       
     }
     desenhar(){
@@ -33,6 +35,7 @@ class Personagem
       }
       // se agacha
       if(keyIsDown(83)){
+        this.vx = 0.8;
         // aplica uma animação para diminuir o personagem e seu y
         if(this.altura>this.alturaAgachado){
           //  nao apague esta linha, faz o Personagem nao cair de estruturas
@@ -42,6 +45,7 @@ class Personagem
         }
         this.agachado = true;
       } else {
+        this.vx = 5;
         // aplica a animacao para fazer o Personagem crescer
           if(this.altura<this.alturaLevantado){
           //  nao apague esta linha, faz o Personagem nao cair de estruturas
@@ -70,7 +74,7 @@ class Personagem
           this.pulando = false;
         }
       }
-      if(this.y > height - this.altura && !this.agachado) {
+      if(this.y > height - this.altura) {
         // quando o personagem nao estiver em nenhuma estrutura 
         // ele vai cair e parar no chao
         this.y = height - this.altura;
@@ -80,7 +84,8 @@ class Personagem
     }
   
     pular() {
-      if (!this.pulando) {
+      
+      if (!this.pulando && !this.agachado) {
         this.vy = -10;         
       }
     
@@ -103,5 +108,26 @@ class Personagem
     levarDano(DanoIni){
       this.vida -=1;
     }
+    pegarItem(item){
+        push()
+        fill("black")
+        textSize(30)
+        this.itemPegado ? text("item pegado", 20, 20) : text("item solto",20,20)
+        pop()
+      
+    }
 }
-  
+
+function keyPressed(){
+  let momentoatual = millis();
+      let intervalo = momentoatual - instanteInicial;
+      for(let itemX of itens){
+        let distancia = dist(itemX.x, itemX.y, breu.x, breu.y)<25
+        
+        if(intervalo>=1500 && key=="f"){
+        breu.itemPegado = !breu.itemPegado;
+        instanteInicial = momentoatual;
+        
+}
+      }
+}
