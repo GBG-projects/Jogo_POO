@@ -1,0 +1,32 @@
+{
+    "Cenarios": {
+        "Floresta":{
+            "img":"Imagens/Cenario/quarto.png",
+            "x":0,
+            "y":0,
+            "largura":800,
+            "altura":550,
+            "imgxI":0,
+            "imgxW":1200,
+            "imgyI":325,
+            "imgyH":550,
+            "mundoReal":true
+        }
+
+    },
+    "Sprites":{
+        "t2":"Imagens/Sprites/movimento_2.png",
+        "t3":"Imagens/Sprites/movimento_3.png",
+        "t4":"Imagens/Sprites/movimento_4.png",
+        "t1":"Imagens/Sprites/movimento_1.png",
+        "t5":"Imagens/Sprites/movimento_5.png",
+        "t6":"Imagens/Sprites/movimento_6.png"
+    },
+    "personagem":{
+        "x":10,
+        "y":480,
+        "largura":70,
+        "altura":70
+    }
+
+}

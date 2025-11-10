@@ -1,28 +1,13 @@
-class Estrutura {
-    constructor(x, y, Altura, Largura, Interagivel, Durabilidade, IsMovel, imagem){
-        this.x = x;
-        this.y = y;
-        this.Altura = Altura;
-        this.Largura = Largura;
-        this.Interagivel = Interagivel;
-        this.Durabilidade = Durabilidade;
-        this.IsMovel = IsMovel;
-        this.imagem = imagem;
-    }
-
-    mostrar(){
-        // if(this.Durabilidade<=0 && !this.IsMovel){
-        //     return;
-        // }
-        // if(this.Durabilidade<=0 && this.IsMovel){
-        //     // image("", this.x, this.y/3)
-        // }
-        fill("red")
-        rect(this.x, this.y, this.Largura, this.Altura)
+class Estrutura extends ModeloBase {
+    constructor(x, y,largura,altura,imagem, interagivel, durabilidade, isMovel){
+       super(x,y,largura, altura, imagem);
+        this.interagivel = interagivel;
+        this.durabilidade = durabilidade;
+        this.isMovel = isMovel;
     }
 
     Quebrar(DanoJogador){
-        if(this.Durabilidade == null){
+        if(this.durabilidade == null){
             return;
         }
         else {

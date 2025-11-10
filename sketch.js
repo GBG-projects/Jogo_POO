@@ -1,21 +1,53 @@
-let breu, estrutura1,breuIMG,cenarioAtual;
+let breu, estrutura1,breuIMG,camera;
 let estruturas = [];
-let fundo1;
+let fundos = [];
+let meuJson;
+let jogo = new Jogo()
 function preload(){ 
-breuIMG = loadImage("https://png.pngtree.com/png-clipart/20220605/original/pngtree-pixel-art-character-wearing-suit-png-image_7964693.png")
-fundo1 = loadImage("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQoW89wIB0tsQq59eoBL2HYwI49cKWkcAbPvw&s")
+  meuJson = loadJSON("jogo.json");
 }
 function setup() {
-  createCanvas(900, 650);
-  breu = new Personagem(10, height- 70, 50, 80, breuIMG)
-  estrutura1 = new Estrutura(200, height- 80, 20, 50, null, null, null, null)
+  createCanvas(800, 550);
+  puxarCenario()
+  objPersonagem = PegarInfoPersonagem()
+  breu = new Personagem(
+    objPersonagem.x,
+    objPersonagem.y,
+    objPersonagem.largura,
+    objPersonagem.altura
+  )
+  camera = new Camera(
+    objPersonagem.x,
+    objPersonagem.y
+  );
+  estrutura1 = new Estrutura(200, height- 80, 50, 20, null, null, null, null)
+  
   estruturas.push(estrutura1);
 }
 
-
-
-
 function draw() {
   background(200);
-  Jogo.Jogar()
+  jogo.Jogar()
+}
+
+function puxarCenario(){
+  let cenariosDoJogo = meuJson.Cenarios;
+  for(let cenario in cenariosDoJogo){
+    let c = cenariosDoJogo[cenario];
+    c.img = loadImage(c.img);
+    fundos.push(c);
+  }
+}
+function PegarInfoPersonagem(){
+  let meuPersonagem = meuJson.personagem;
+  let objPersonagem = {}
+  for(let valor in meuPersonagem){
+    objPersonagem[valor] = meuPersonagem[valor];
+  }
+  
+  return objPersonagem;
+}
+
+function mundoAtual(){
+  
 }

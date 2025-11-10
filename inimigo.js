@@ -1,21 +1,8 @@
-class Inimigo {
-    constructor(x, y, altura,largura, IsDerrotavel, imagem){
-        this.x = x;
-        this.y = y;
-        this.altura = altura;
-        this.largura = largura;
+class Inimigo extends ModeloBase {
+    constructor(x, y, largura,altura,imagem, IsDerrotavel ){
+        super(x,y, largura, altura, imagem);
         this.IsDerrotavel = IsDerrotavel;
-        this.imagem = imagem;
         this.durabilidade = 20;
-    }
-
-    desenhar(){
-        
-        rect(this.x, this.y, this.largura, this.altura)
-    }
-
-    levarDano(ataqueJogador){
-        this.durabilidade-= ataqueJogador
     }
 
     Dardano(PosX, posY, vidaJogador){
