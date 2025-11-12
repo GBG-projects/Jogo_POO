@@ -2,14 +2,22 @@ class Jogo {
     Jogar() {
         this.fase = 1;
         if (this.fase === 1) {
-            this.jogo();
+            this.f1();
         }
-    }
 
-    jogo() {
+        this.metodoObri()
+
+    }
+    metodoObri(){
+        fill(255, 0, 0);
+        textSize(20);
+        text(`Vida: ${breu.vida}`, 20, 30);
+   
+    }
+    f1() {
         push();
         translate(-camera.x, 0);
-        for(let fundo of fundos){
+        for(let fundo of fase1){
             image(
                 fundo.img,
                 fundo.x, fundo.y,
@@ -19,7 +27,7 @@ class Jogo {
             ); 
         } 
         pop();
-        breu.mover();
+        breu.mover(fase1[fase1.length-1].largura);
         breu.atualizar(estruturas);
         camera.acompanhar(breu);
         push();
@@ -29,9 +37,10 @@ class Jogo {
         }
         breu.desenhar();
         pop();
+      
+    }
 
-        fill(255, 0, 0);
-        textSize(20);
-        text(`Vida: ${breu.vida}`, 20, 30);
+    f2(){
+
     }
 }

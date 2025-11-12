@@ -1,6 +1,15 @@
 let breu, estrutura1,breuIMG,camera;
 let estruturas = [];
 let fundos = [];
+let fase1 = [];
+let fase2 = [];
+let fase3 = [];
+let fase4 = [];
+let fase5 = [];
+let fase6 = [];
+
+
+
 let meuJson;
 let jogo = new Jogo()
 function preload(){ 
@@ -15,6 +24,7 @@ function setup() {
     objPersonagem.y,
     objPersonagem.largura,
     objPersonagem.altura
+
   )
   camera = new Camera(
     objPersonagem.x,
@@ -37,6 +47,12 @@ function puxarCenario(){
     c.img = loadImage(c.img);
     fundos.push(c);
   }
+  fase1.push(fundos[0],fundos[1])
+/*fase2.push(fundos[1])
+fase3.push(fundos[2],fundos[3])
+fase4.push(fundos[4],fundos[5])
+fase5.push(fundos[6],fundos[7])
+fase6.push(fundos[8],fundos[9])*/
 }
 function PegarInfoPersonagem(){
   let meuPersonagem = meuJson.personagem;

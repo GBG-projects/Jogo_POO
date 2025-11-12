@@ -1,6 +1,6 @@
 {
     "Cenarios": {
-        "Floresta":{
+        "quarto":{
             "img":"Imagens/Cenario/quarto.png",
             "x":0,
             "y":0,
@@ -10,9 +10,23 @@
             "imgxW":1200,
             "imgyI":325,
             "imgyH":550,
-            "mundoReal":true
+            "mundoReal":true,
+            "fase":1
+        },
+        "quarto2":{
+            "img":"Imagens/Cenario/quarto.png",
+            "x":800,
+            "y":0,
+            "largura":800,
+            "altura":550,
+            "imgxI":0,
+            "imgxW":1200,
+            "imgyI":325,
+            "imgyH":550,
+            "mundoReal":true,
+            "fase":1
         }
-
+        
     },
     "Sprites":{
         "t2":"Imagens/Sprites/movimento_2.png",

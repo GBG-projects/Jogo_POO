@@ -33,13 +33,13 @@ class Personagem extends ModeloBase {
     this.mudarestado()
     image(this.imagem,this.x,this.y,this.largura,this.altura,50,0,280,384)
   }
-  mover() {
+  mover(tmfase) {
     
-    if (keyIsDown(65)) {
+    if (keyIsDown(65) && this.x>-10) {
       this.x -= this.vx;
       this.estado = "esquerda";
     }
-    else if (keyIsDown(68)) {
+    else if (keyIsDown(68) && this.x+this.largura-10<tmfase) {
       this.x += this.vx;
       this.estado = "direita";
     }

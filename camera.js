@@ -6,7 +6,7 @@ class Camera {
 
     acompanhar(personagem) {
         const margemEsquerda = 100;
-        const margemDireita = width - 100;
+        const margemDireita = width-3;
 
         if (personagem.x - this.x > margemDireita) {
             this.x = personagem.x - margemDireita;
