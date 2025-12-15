@@ -1,21 +1,19 @@
 class Camera {
     constructor(x, y) {
         this.x = x;
-        this.y = y; 
+        this.y = y;
     }
 
-    acompanhar(personagem) {
-        const margemEsquerda = 100;
-        const margemDireita = width-3;
+    acompanhar(personagem, limiteMaximo) {
 
-        if (personagem.x - this.x > margemDireita) {
-            this.x = personagem.x - margemDireita;
-        }
+        const offsetFrente = 150;  
 
-        if (personagem.x - this.x < margemEsquerda) {
-            this.x = personagem.x - margemEsquerda;
-        }
+        let posicaoDesejada = personagem.x - width / 2 + offsetFrente;
 
-        this.x = max(0, this.x);
+        posicaoDesejada = max(0, posicaoDesejada);
+
+        posicaoDesejada = min(posicaoDesejada, limiteMaximo - width);
+
+        this.x = posicaoDesejada;
     }
 }

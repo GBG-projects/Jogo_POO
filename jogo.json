@@ -8,23 +8,107 @@
             "altura":550,
             "imgxI":0,
             "imgxW":1200,
-            "imgyI":325,
-            "imgyH":550,
-            "mundoReal":true,
-            "fase":1
+            "imgyI":448,
+            "imgyH":607,
+            "fase":1,
+            "estruturas":{
+                "cama":{
+                    "img":"Imagens/Cenario/cama.png",
+                    "x":10,
+                    "y":420,
+                    "largura":300,
+                    "altura":190,
+                    "imgxI":100,
+                    "imgxW":360,
+                    "imgyI":120,
+                    "imgyH":385
+                },
+                "livro1":{
+                    "img":"Imagens/Cenario/livroEstante1.png",
+                    "x":570,
+                    "y":353,
+                    "largura":50,
+                    "altura":50,
+                    "imgxI":15,
+                    "imgxW":1222,
+                    "imgyI":15,
+                    "imgyH":950,
+                    "imgAberta":"Imagens/Cenario/livroEstante1.png"
+                },
+                "livro2":{
+                    "img":"Imagens/Cenario/livroEstante2.png",
+                    "x":623,
+                    "y":353,
+                    "largura":50,
+                    "altura":50,
+                    "imgxI":15,
+                    "imgxW":1222,
+                    "imgyI":15,
+                    "imgyH":950,
+                    "imgAberta":"Imagens/Cenario/livro.png"
+                },
+                "livro3":{
+                    "img":"Imagens/Cenario/livro_azul_aberto_deitado.png",
+                    "x":560,
+                    "y":430,
+                    "largura":50,
+                    "altura":50,
+                    "imgxI":15,
+                    "imgxW":1222,
+                    "imgyI":15,
+                    "imgyH":950,
+                    "imgAberta":"Imagens/Cenario/livro_aberto_em_pe_azul.png"
+                }
+            }
         },
-        "quarto2":{
-            "img":"Imagens/Cenario/quarto.png",
+        "floresta":{
+            "img":"Imagens/Cenario/floresta.png",
+            "x":0,
+            "y":0,
+            "largura":800,
+            "altura":550,
+            "imgxI":0,
+            "imgxW":6500,
+            "imgyI":100,
+            "imgyH":3700, 
+            "fase":2
+
+        },
+        "floresta2":{
+            "img":"Imagens/Cenario/floresta.png",
             "x":800,
             "y":0,
             "largura":800,
             "altura":550,
             "imgxI":0,
-            "imgxW":1200,
-            "imgyI":325,
-            "imgyH":550,
-            "mundoReal":true,
-            "fase":1
+            "imgxW":6500,
+            "imgyI":100,
+            "imgyH":3700, 
+            "fase":2,
+            "estruturas":{
+                "entradaTrem":{
+                    "img":"Imagens/Cenario/trem2.png",
+                    "x":1100,
+                    "y":100,
+                    "largura":589,
+                    "altura":450,
+                    "imgxI":800,
+                    "imgxW":6400,
+                    "imgyI":100,
+                    "imgyH":3790
+                },
+                "graveto":{
+                    "img":"Imagens/Cenario/Graveto.png",
+                    "x":400,
+                    "y":520,
+                    "largura":289,
+                    "altura":30,
+                    "imgxI":10,
+                    "imgxW":1160,
+                    "imgyI":120,
+                    "imgyH":385
+                }
+            }
         }
         
     },
@@ -37,10 +121,10 @@
         "t6":"Imagens/Sprites/movimento_6.png"
     },
     "personagem":{
-        "x":10,
+        "x":900,
         "y":480,
-        "largura":70,
-        "altura":70
+        "largura":115,
+        "altura":115
     }
 
 }

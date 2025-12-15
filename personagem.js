@@ -39,7 +39,7 @@ class Personagem extends ModeloBase {
       this.x -= this.vx;
       this.estado = "esquerda";
     }
-    else if (keyIsDown(68) && this.x+this.largura-10<tmfase) {
+    else if (keyIsDown(68) && this.x+this.largura < tmfase) {
       this.x += this.vx;
       this.estado = "direita";
     }
@@ -77,6 +77,12 @@ class Personagem extends ModeloBase {
     this.y += this.vy;
 
     for (let estrutura of estruturas) {
+
+      if(estrutura.tipo == "cama" || estrutura.tipo=="livro"
+        || estrutura.tipo == "portaTrem"
+      ){
+        continue;
+      }
       let lado = this.colidiu(estrutura);
 
       if (lado === "cima" && this.vy >= 0) {
@@ -113,39 +119,37 @@ class Personagem extends ModeloBase {
   }
 
   colidiu(outro) {
-    let margem = 10;
-
     let colisaoX =
-      this.x+margem < outro.x + outro.largura && this.x + this.largura-margem > outro.x;
-    let colisaoY =
-      this.y < outro.y + outro.altura && this.y + this.altura > outro.y;
+    this.x < outro.x + outro.largura &&
+    this.x + this.largura > outro.x;
 
-    if (colisaoX && colisaoY) {
-      let sobreX = Math.min(
-        this.x + this.largura - outro.x,
-        outro.x + outro.largura - this.x
-      );
-      let sobreY = Math.min(
-        this.y + this.altura - outro.y,
-        outro.y + outro.altura - this.y
-      );
+  let colisaoY =
+    this.y < outro.y + outro.altura &&
+    this.y + this.altura > outro.y;
 
-      if (sobreX < sobreY) {
-        if (this.x < outro.x) {
-          return "esquerda";
-        } else {
-          return "direita";
-        }
-      } else {
-        if (this.y < outro.y) {
-          return "cima"; 
-        } else {
-          return "baixo"; 
-        }
-      }
+  if (colisaoX && colisaoY) {
+
+    let sobreX = Math.min(
+      this.x + this.largura - outro.x,
+      outro.x + outro.largura - this.x
+    );
+
+    let sobreY = Math.min(
+      this.y + this.altura - outro.y,
+      outro.y + outro.altura - this.y
+    );
+
+    if (sobreX < sobreY) {
+      if (this.x < outro.x) return "esquerda";
+      else return "direita";
+    } else {
+      if (this.y < outro.y) return "cima";
+      else return "baixo";
     }
-    return null; 
   }
+
+  return null;
+}
 
   atacar(VidaIni) {
     VidaIni -= this.dano;
