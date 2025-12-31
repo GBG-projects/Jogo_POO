@@ -11,8 +11,11 @@ class Personagem extends ModeloBase {
     this.gravidade = 0.5;
     this.alturaLevantado = altura;
     this.alturaAgachado = altura / 1.75;
+    this.inventario = [];
+    this.gravetoPego = false;
     this.estado = "parado";
-     this.spritesFrente = [
+    
+    this.spritesFrente = [
       loadImage(meuJson.Sprites.t1),
       loadImage(meuJson.Sprites.t2),
       loadImage(meuJson.Sprites.t3)
@@ -23,6 +26,17 @@ class Personagem extends ModeloBase {
       loadImage(meuJson.Sprites.t6)
     ];
 
+    this.spritesFrenteComGraveto = [
+      loadImage(meuJson.Sprites.t1_graveto),
+      loadImage(meuJson.Sprites.t2_graveto),
+      loadImage(meuJson.Sprites.t3_graveto)
+    ];
+    this.spritesTrasComGraveto = [
+      loadImage(meuJson.Sprites.t4_graveto),
+      loadImage(meuJson.Sprites.t5_graveto),
+      loadImage(meuJson.Sprites.t6_graveto)
+    ];
+
     this.imagem = this.spritesFrente[1];
     this.frameAtual = 0;
     this.ultimoFrameTempo = 0;
@@ -31,21 +45,22 @@ class Personagem extends ModeloBase {
 
   desenhar(){
     this.mudarestado()
-    image(this.imagem,this.x,this.y,this.largura,this.altura,50,0,280,384)
+    image(this.imagem, this.x, this.y, this.largura, this.altura, 50, 0, 280, 384)
   }
+
   mover(tmfase) {
-    
-    if (keyIsDown(65) && this.x>-10) {
+    if (keyIsDown(65) && this.x > -10) {
       this.x -= this.vx;
       this.estado = "esquerda";
     }
-    else if (keyIsDown(68) && this.x+this.largura < tmfase) {
+    else if (keyIsDown(68) && this.x + this.largura < tmfase) {
       this.x += this.vx;
       this.estado = "direita";
     }
     else {
       this.estado = "parado";
     }
+    
     if (keyIsDown(83) && !this.pulando) {
       if (this.altura > this.alturaAgachado) {
         let base = this.y + this.altura; 
@@ -59,11 +74,9 @@ class Personagem extends ModeloBase {
         let base = this.y + this.altura;
         this.altura += 1.5;
         this.y = base - this.altura;
-        this.vx= 3;
+        this.vx = 3;
       }
-      
       this.agachado = false;
-
     }
 
     if (keyIsDown(87)) {
@@ -77,12 +90,10 @@ class Personagem extends ModeloBase {
     this.y += this.vy;
 
     for (let estrutura of estruturas) {
-
-      if(estrutura.tipo == "cama" || estrutura.tipo=="livro"
-        || estrutura.tipo == "portaTrem"
-      ){
+      if(estrutura.tipo != "interagivel"){
         continue;
       }
+      
       let lado = this.colidiu(estrutura);
 
       if (lado === "cima" && this.vy >= 0) {
@@ -120,36 +131,35 @@ class Personagem extends ModeloBase {
 
   colidiu(outro) {
     let colisaoX =
-    this.x < outro.x + outro.largura &&
-    this.x + this.largura > outro.x;
+      this.x < outro.x + outro.largura &&
+      this.x + this.largura > outro.x;
 
-  let colisaoY =
-    this.y < outro.y + outro.altura &&
-    this.y + this.altura > outro.y;
+    let colisaoY =
+      this.y < outro.y + outro.altura &&
+      this.y + this.altura > outro.y;
 
-  if (colisaoX && colisaoY) {
+    if (colisaoX && colisaoY) {
+      let sobreX = Math.min(
+        this.x + this.largura - outro.x,
+        outro.x + outro.largura - this.x
+      );
 
-    let sobreX = Math.min(
-      this.x + this.largura - outro.x,
-      outro.x + outro.largura - this.x
-    );
+      let sobreY = Math.min(
+        this.y + this.altura - outro.y,
+        outro.y + outro.altura - this.y
+      );
 
-    let sobreY = Math.min(
-      this.y + this.altura - outro.y,
-      outro.y + outro.altura - this.y
-    );
-
-    if (sobreX < sobreY) {
-      if (this.x < outro.x) return "esquerda";
-      else return "direita";
-    } else {
-      if (this.y < outro.y) return "cima";
-      else return "baixo";
+      if (sobreX < sobreY) {
+        if (this.x < outro.x) return "esquerda";
+        else return "direita";
+      } else {
+        if (this.y < outro.y) return "cima";
+        else return "baixo";
+      }
     }
-  }
 
-  return null;
-}
+    return null;
+  }
 
   atacar(VidaIni) {
     VidaIni -= this.dano;
@@ -160,35 +170,71 @@ class Personagem extends ModeloBase {
     this.vida -= dano;
     if (this.vida < 0) this.vida = 0;
   }
+
   mudarestado(){
+    let spritesAtivosFrente = this.gravetoPego ? this.spritesFrenteComGraveto : this.spritesFrente;
+    let spritesAtivosTras = this.gravetoPego ? this.spritesTrasComGraveto : this.spritesTras;
+
     if (this.estado === "direita") {
       if (millis() - this.ultimoFrameTempo > this.intervaloTroca) {
-        this.frameAtual = (this.frameAtual + 1) % this.spritesFrente.length;
-        this.imagem = this.spritesFrente[this.frameAtual];
+        this.frameAtual = (this.frameAtual + 1) % spritesAtivosFrente.length;
+        this.imagem = spritesAtivosFrente[this.frameAtual];
         this.ultimoFrameTempo = millis();
       }
     }
     else if (this.estado === "esquerda") {
       if (millis() - this.ultimoFrameTempo > this.intervaloTroca) {
-        this.frameAtual = (this.frameAtual + 1) % this.spritesTras.length;
-        this.imagem = this.spritesTras[this.frameAtual];
+        this.frameAtual = (this.frameAtual + 1) % spritesAtivosTras.length;
+        this.imagem = spritesAtivosTras[this.frameAtual];
         this.ultimoFrameTempo = millis();
       }
     }
-     else {
+    else {
       let isFrente = false;
-      for(let frente of this.spritesFrente){
-          if(this.imagem == frente){
-              isFrente = true;
-          }
+      for(let frente of spritesAtivosFrente){
+        if(this.imagem == frente){
+          isFrente = true;
+        }
       }
 
       if(isFrente){
-        this.imagem = this.spritesFrente[1];
+        this.imagem = spritesAtivosFrente[1];
       }
       else {
-        this.imagem = this.spritesTras[1];
+        this.imagem = spritesAtivosTras[1];
       }
+    }
+  }
+
+  pegarGraveto(){
+  let temGraveto = this.inventario.some(item => item.tipo === "item");
+  
+  if(!this.gravetoPego && temGraveto){
+    this.gravetoPego = true;
+    this.frameAtual = 0;
+    console.log("Graveto equipado na mão!");
+  }
+}
+
+soltarGraveto(){
+  if(this.gravetoPego){
+    this.gravetoPego = false;
+    this.frameAtual = 0;
+    console.log("Graveto guardado no inventário!");
+  }
+}
+
+alternarGraveto(){
+  let temGraveto = this.inventario.some(item => item.tipo === "item");
+  
+  if(temGraveto){
+    if(this.gravetoPego){
+      this.soltarGraveto();
+    } else {
+      this.pegarGraveto();
+    }
+  } else {
+    console.log("Você não tem graveto no inventário!");
   }
 }
 }

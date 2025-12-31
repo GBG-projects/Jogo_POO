@@ -1,6 +1,6 @@
 class Jogo {
     constructor() {
-        this.fase = 2;           
+        this.fase = 1;           
         this.mudandoFase = false;
         this.faseDestino = 1;   
         this.fadeAlpha = 0;    
@@ -106,5 +106,6 @@ class Jogo {
         for (let estrutura of estruturas) estrutura.desenhar();
         breu.desenhar();
         pop();
+
     }
 }

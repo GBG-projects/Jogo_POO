@@ -11,8 +11,16 @@ let podeInteragir = false;
 let camaProxima = null;
 let lendoLivro = false;
 let livroProximo = null;
-let imagemLivroAberto = null;
+let TextoLivroAberto = null;
 let portaTrem = null;
+let item = null;
+let gravetoNaMao = false;
+let textoAtual = [];
+let indiceLinha = 0;
+let indiceLetra = 0;
+let tempoUltimaLetra = 0;
+let velocidadeTexto = 50; 
+let textoCompleto = false
 
 function preload() { 
   meuJson = loadJSON("jogo.json");
@@ -30,9 +38,10 @@ function setup() {
     objPersonagem.altura
   );
 
+
   camera = new Camera(objPersonagem.x, objPersonagem.y);
 
-  carregarEstruturasDaFase(2);
+  carregarEstruturasDaFase(1);
 }
 
 function draw() {
@@ -61,18 +70,28 @@ function draw() {
 
     }
 
+    else if(item){
+      text("Pressione F para pegar o graveto", width/2, height - 50);
+
+    }
+
     pop();
     
   }
   if(lendoLivro){
-    lerTexto(livroProximo.imgAberta);
+    lerTexto(TextoLivroAberto);
+
     return;
   }
+
 }
 
 function checarInteracaoElementos() {
   podeInteragir = false;
   camaProxima = null;
+  livroProximo = null;
+  portaTrem = null;
+  item = null;
 
   for (let e of estruturas) {
     if (e.tipo === "cama" && jogo.fase === 1) {
@@ -108,7 +127,18 @@ function checarInteracaoElementos() {
           breu.y + breu.altura> e.y;
         if(colide){
           podeInteragir = true;
-          porta = e;
+          portaTrem = e;
+        }
+    }
+    if(e.tipo=="item"){
+      let colide =
+          breu.x < e.x + e.largura &&
+          breu.x + breu.largura > e.x &&
+          breu.y < e.y + e.altura &&
+          breu.y + breu.altura> e.y;
+        if(colide){
+          podeInteragir = true;
+          item = e;
         }
     }
   }
@@ -117,26 +147,44 @@ function checarInteracaoElementos() {
 function keyPressed() {
   if (lendoLivro && keyCode === 27) {
     lendoLivro = false;
+    textoAtual = [];
+    indiceLinha = 0;
+    indiceLetra = 0;
+    textoCompleto = false;
     return;
   }
 
   if ((key === "e" || key === "E") && podeInteragir) {
-
     if (camaProxima) {
       jogo.iniciarTransicao(2);
     }
-
     else if (livroProximo) {
       lendoLivro = true;
-      imagemLivroAberto = livroProximo.imgAberta;
+      TextoLivroAberto = livroProximo.texto;
+      textoAtual = [];
+      indiceLinha = 0;
+      indiceLetra = 0;
+      textoCompleto = false;
     }
 
     else if(portaTrem){
       jogo.iniciarTransicao(3);
     }
   }
-}
 
+  else if((key=="f" || key=="F")){
+    if(item && podeInteragir) {
+      pegarItem(item);
+      breu.gravetoPego = true;
+      breu.frameAtual = 0;
+      console.log("Graveto coletado e equipado!");
+    }
+    else {
+      breu.alternarGraveto()
+    }
+    
+}
+}
 function carregarEstruturasDaFase(fase) {
   estruturas = [];
 
@@ -165,7 +213,7 @@ function carregarEstruturasDaFase(fase) {
       false,
       null,
       false,
-      "livro"
+      "livroNaoInteragivel"
     );
 
     let livro2 = new Estrutura(
@@ -175,7 +223,7 @@ function carregarEstruturasDaFase(fase) {
       false,
       null,
       false,
-      "livro",
+      "livroNaoInteragivel",
     );
 
     let livro3 = new Estrutura(
@@ -187,7 +235,7 @@ function carregarEstruturasDaFase(fase) {
       false,
       "livro",
     );
-    livro3.imgAberta = loadImage(livro3JSON.imgAberta);
+    livro3.texto = livro3JSON.texto
 
     estruturas.push(cama, livro1, livro2, livro3);
 }
@@ -248,11 +296,66 @@ function PegarInfoPersonagem() {
   return objPersonagem;
 }
 
-function lerTexto(img){
+function lerTexto(textoReferente){
+  if (textoAtual.length === 0) {
+    textoAtual = textoReferente;
+    indiceLinha = 0;
+    indiceLetra = 0;
+    textoCompleto = false;
+    tempoUltimaLetra = millis();
+  }
+
+  let posX = 15;
+  let posY = height - 80;
+  
   push();
-  imageMode(CORNER);
-  image(img, 0, 0, width, height);
+  fill(0, 0, 0, 215);
+  rect(0, height - 105, width / 1.5, 105, 5, 5);
+  
+  push();
+  textSize(16);
+  fill("red");
+  stroke(255, 99,74)
+  
+  for (let i = 0; i < indiceLinha; i++) {
+    text(textoAtual[i], posX, posY + i * 20);
+  }
+  
+  if (indiceLinha < textoAtual.length) {
+    let linhaAtual = textoAtual[indiceLinha].substring(0, indiceLetra);
+    text(linhaAtual, posX, posY + indiceLinha * 20);
+    
+    if (millis() - tempoUltimaLetra > velocidadeTexto && !textoCompleto) {
+      indiceLetra++;
+      tempoUltimaLetra = millis();
+      
+      if (indiceLetra > textoAtual[indiceLinha].length) {
+        indiceLinha++;
+        indiceLetra = 0;
+        
+        if (indiceLinha >= textoAtual.length) {
+          textoCompleto = true;
+        }
+      }
+    }
+  }
+  
+  if (textoCompleto) {
+    push();
+    fill(255);
+    textSize(14);
+    textAlign(CENTER);
+    text("Pressione ESC para fechar", width/2, 15);
+    pop();
+  }
+  
+  pop();
   pop();
 }
 
-
+function pegarItem(item){
+  if(item.tipo=="item"){
+    breu.inventario.push(item);
+    estruturas = estruturas.filter((a) => a!=item)
+  }
+}
