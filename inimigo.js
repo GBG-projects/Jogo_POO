@@ -1,17 +1,30 @@
 class Inimigo extends ModeloBase {
-    constructor(x, y, largura,altura,imagem, IsDerrotavel ){
-        super(x,y, largura, altura, imagem);
-        this.IsDerrotavel = IsDerrotavel;
-        this.durabilidade = 20;
+  constructor(x, y, largura, altura, imagem, isDerrotavel) {
+    super(x, y, largura, altura, imagem);
+    this.isDerrotavel = isDerrotavel;
+    this.durabilidade = 20;
+    this.dano = 1;
+  }
+
+  mover(personagem) {
+    let dx = 2;
+
+    // Inimigo persegue o personagem
+
+    if (this.x > personagem.x) {
+      this.x -= dx;
+    } else {
+      this.x += dx;
     }
 
-    Dardano(PosX, posY, vidaJogador){
-        
-    let distanciaX = Math.max(this.x, PosX) - Math.min(x, PosX)
-    let distanciaY = Math.max(this.y, posY) - Math.min(y, posY)
-    if(distanciaX <10 && distanciaY<10){
-        vidaJogador -= 1;
+    // colisão
+    this.darDano(personagem);
+  }
+
+  darDano(personagem) {
+    //função colisão ModeloBase
+    if (this.colidiu(personagem)) {
+      personagem.levarDano(this.dano);
     }
-    return vidaJogador;
-}
+  }
 }
