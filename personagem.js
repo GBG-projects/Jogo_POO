@@ -15,27 +15,10 @@ class Personagem extends ModeloBase {
     this.gravetoPego = false;
     this.estado = "parado";
     
-    this.spritesFrente = [
-      loadImage(meuJson.Sprites.t1),
-      loadImage(meuJson.Sprites.t2),
-      loadImage(meuJson.Sprites.t3)
-    ];
-    this.spritesTras = [
-      loadImage(meuJson.Sprites.t4),
-      loadImage(meuJson.Sprites.t5),
-      loadImage(meuJson.Sprites.t6)
-    ];
-
-    this.spritesFrenteComGraveto = [
-      loadImage(meuJson.Sprites.t1_graveto),
-      loadImage(meuJson.Sprites.t2_graveto),
-      loadImage(meuJson.Sprites.t3_graveto)
-    ];
-    this.spritesTrasComGraveto = [
-      loadImage(meuJson.Sprites.t4_graveto),
-      loadImage(meuJson.Sprites.t5_graveto),
-      loadImage(meuJson.Sprites.t6_graveto)
-    ];
+    this.spritesFrente = spritesBreuFrente;
+    this.spritesTras = spritesBreuTras;
+    this.spritesFrenteComGraveto = spritesBreuFrenteGraveto;
+    this.spritesTrasComGraveto = spritesBreuTrasGraveto;
 
     this.imagem = this.spritesFrente[1];
     this.frameAtual = 0;

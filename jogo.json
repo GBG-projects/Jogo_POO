@@ -71,8 +71,8 @@
             "altura":550,
             "imgxI":0,
             "imgxW":6500,
-            "imgyI":100,
-            "imgyH":3700, 
+            "imgyI":0,
+            "imgyH":3900, 
             "fase":2
 
         },
@@ -84,8 +84,8 @@
             "altura":550,
             "imgxI":0,
             "imgxW":6500,
-            "imgyI":100,
-            "imgyH":3700, 
+            "imgyI":0,
+            "imgyH":1800, 
             "fase":2,
             "estruturas":{
                 "entradaTrem":{
@@ -111,8 +111,101 @@
                     "imgyH":300
                 }
             }
+        },
+        "vagao1":{
+            "img":"Imagens/Cenario/interior_do_trem.png",
+            "x":0,
+            "y":0,
+            "largura":900,
+            "altura":550,
+            "imgxI":0,
+            "imgxW":10200,
+            "imgyI":0,
+            "imgyH":850, 
+            "fase":3,
+            "estruturas":{
+                "mulher":{
+                    "img":"Imagens/Cenario/banco_com_mulher.png",
+                    "x":10,
+                    "y":100,
+                    "largura":150,
+                    "altura":350,
+                    "imgxI":10,
+                    "imgxW":2200,
+                    "imgyI":10,
+                    "imgyH":3210 
+                },
+                "gordo":{
+                    "img":"Imagens/Cenario/banco_gordo.png",
+                    "x":180,
+                    "y":100,
+                    "largura":150,
+                    "altura":350,
+                    "imgxI":10,
+                    "imgxW":2200,
+                    "imgyI":10,
+                    "imgyH":3210 
+                },
+                "homem":{
+                    "img":"Imagens/Cenario/banco_com_um_cara.png",
+                    "x":380,
+                    "y":100,
+                    "largura":150,
+                    "altura":350,
+                    "imgxI":10,
+                    "imgxW":2200,
+                    "imgyI":10,
+                    "imgyH":3210 
+                },
+                "vazio":{
+                    "img":"Imagens/Cenario/banco_vazio.png",
+                    "x":580,
+                    "y":100,
+                    "largura":150,
+                    "altura":350,
+                    "imgxI":10,
+                    "imgxW":2200,
+                    "imgyI":10,
+                    "imgyH":3210 
+                },
+                "pescoco":{
+                    "img":"Imagens/Cenario/banco_com_pescoco.png",
+                    "x":780,
+                    "y":120,
+                    "largura":150,
+                    "altura":350,
+                    "imgxI":10,
+                    "imgxW":2200,
+                    "imgyI":10,
+                    "imgyH":3210 
+                }
+            }
+        },
+        "vagao2":{
+            "img":"Imagens/Cenario/interior_do_trem.png",
+            "x":0,
+            "y":0,
+            "largura":900,
+            "altura":550,
+            "imgxI":0,
+            "imgxW":10200,
+            "imgyI":0,
+            "imgyH":5100, 
+            "fase":4,
+            "estruturas":{
+                "porta":{
+                    "img":"Imagens/Cenario/trem2.png",
+                    "x":100,
+                    "y":100,
+                    "largura":9,
+                    "altura":50,
+                    "imgxI":0,
+                    "imgxW":64,
+                    "imgyI":100,
+                    "imgyH":390 
+                }
+            }
         }
-        
     },
     "Sprites":{
         "t2":"Imagens/Sprites/movimento_2.png",
