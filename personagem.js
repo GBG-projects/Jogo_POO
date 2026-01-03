@@ -109,6 +109,10 @@ class Personagem extends ModeloBase {
   pular() {
     if (!this.pulando && !this.agachado) {
       this.vy = -10;
+      this.vx = 3.2
+    }
+    else {
+      this.vx = 4
     }
   }
 

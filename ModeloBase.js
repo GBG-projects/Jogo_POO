@@ -15,6 +15,7 @@ class ModeloBase {
     }
     desenhar(){
         if(this.temImagem && this.imagem){
+
             image(this.imagem, this.x, this.y, this.largura, this.altura)
         }
     }

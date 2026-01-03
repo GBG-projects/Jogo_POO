@@ -179,18 +179,31 @@
                     "imgyI":10,
                     "imgyH":3210 
                 }
+            },
+            "inimigos":{
+                "lesma1":{
+                    "img":"Imagens/inimigos/14827740.png",
+                    "x":300,
+                    "y":500,
+                    "largura":50,
+                    "altura":30,
+                    "imgxI":10,
+                    "imgxW":2200,
+                    "imgyI":10,
+                    "imgyH":3210 
+                }    
             }
         },
         "vagao2":{
-            "img":"Imagens/Cenario/interior_do_trem.png",
-            "x":0,
-            "y":0,
-            "largura":900,
-            "altura":550,
+            "img":"Imagens/inimigos/14827740.png",
+            "x":200,
+            "y":540,
+            "largura":30,
+            "altura":30,
             "imgxI":0,
-            "imgxW":10200,
+            "imgxW":500,
             "imgyI":0,
-            "imgyH":5100, 
+            "imgyH":100, 
             "fase":4,
             "estruturas":{
                 "porta":{

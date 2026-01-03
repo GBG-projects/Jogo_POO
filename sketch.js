@@ -1,5 +1,6 @@
 let breu, camera;
 let estruturas = [];
+let inimigos = [];
 let fundos = [];
 let fase1 = [];
 let fase2 = [];
@@ -79,7 +80,7 @@ function setup() {
 
   camera = new Camera(objPersonagem.x, objPersonagem.y);
 
-  carregarEstruturasDaFase(3);
+  carregarEstruturasDaFase(2);
 }
 
 function draw() {
@@ -94,9 +95,7 @@ function draw() {
   }
   
   jogo.Jogar();
-  console.log(estruturas)
   checarInteracaoElementos();
-
   if (podeInteragir) {
     push();
     fill(255);
@@ -476,5 +475,21 @@ function pegarItem(item){
   if(item.tipo=="item"){
     breu.inventario.push(item);
     estruturas = estruturas.filter((a) => a!=item)
+  }
+}
+
+function carregarInimigos(fase){
+  inimigos = [];
+
+  if(fase == 3){
+    let lesma1JSON = meuJson.Cenarios.vagao1.inimigos.lesma1;
+
+    let lesma1 = new Inimigo(
+      lesma1JSON.x, lesma1JSON.y,
+      lesma1JSON.largura, lesma1JSON.altura,
+      lesma1JSON.img,
+      true
+    )
+    inimigos.push(lesma1)
   }
 }

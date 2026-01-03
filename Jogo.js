@@ -1,6 +1,6 @@
 class Jogo {
     constructor() {
-        this.fase = 3;
+        this.fase = 2;
         this.mudandoFase = false;
         this.faseDestino = 1;
         this.fadeAlpha = 0;
@@ -49,6 +49,7 @@ class Jogo {
             breu.x = 50;
             camera.x = breu.x;
             carregarEstruturasDaFase(this.faseDestino);
+            carregarInimigos(this.fase);
             this.mudandoFase = "volta";
         }
         fill(0, this.fadeAlpha);
@@ -88,6 +89,7 @@ class Jogo {
         breu.mover(limiteCamera);
         breu.atualizar(estruturas);
         camera.acompanhar(breu, limiteCamera);
+        
 
         push();
         translate(-camera.x, 0);
@@ -99,8 +101,13 @@ class Jogo {
             
             est.desenhar();
         }
-        
+            
+            for (let inimigo of inimigos) {
+                inimigo.mover(breu);
+                inimigo.desenhar();
+            }
         breu.desenhar();
+        console.log(inimigos)
         pop();
     }
 
