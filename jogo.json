@@ -182,28 +182,31 @@
             },
             "inimigos":{
                 "lesma1":{
-                    "img":"Imagens/inimigos/14827740.png",
+                    "img":"Imagens/inimigos/lesma_deitada.png",
+                    "img2":"Imagens/inimigos/lesma_em_pe.png",
+                    "img3":"Imagens/inimigos/lesma_deitada_DIREITA.png",
+                    "img4":"Imagens/inimigos/lesma_em_pe_DIREITA.png",
                     "x":300,
                     "y":500,
-                    "largura":50,
-                    "altura":30,
-                    "imgxI":10,
-                    "imgxW":2200,
-                    "imgyI":10,
-                    "imgyH":3210 
+                    "largura":90,
+                    "altura":60,
+                    "imgxI":300,
+                    "imgxW":150,
+                    "imgyI":500,
+                    "imgyH":50 
                 }    
             }
         },
         "vagao2":{
-            "img":"Imagens/inimigos/14827740.png",
-            "x":200,
-            "y":540,
-            "largura":30,
-            "altura":30,
+            "img":"Imagens/Cenario/interior_do_trem.png",
+            "x":0,
+            "y":0,
+            "largura":900,
+            "altura":550,
             "imgxI":0,
-            "imgxW":500,
+            "imgxW":10200,
             "imgyI":0,
-            "imgyH":100, 
+            "imgyH":850, 
             "fase":4,
             "estruturas":{
                 "porta":{
@@ -217,9 +220,23 @@
                     "imgyI":100,
                     "imgyH":390 
                 }
+            },
+            "inimigos":{
+                "cozinheiro":{
+                    "img":"Imagens/inimigos/cozinheiroProvisorio.webp",
+                    "x":300,
+                    "y":500,
+                    "largura":150,
+                    "altura":50,
+                    "imgxI":20,
+                    "imgxW":760,
+                    "imgyI":20,
+                    "imgyH":138 
+                }    
             }
         }
     },
+
     "Sprites":{
         "t2":"Imagens/Sprites/movimento_2.png",
         "t3":"Imagens/Sprites/movimento_3.png",
@@ -235,7 +252,7 @@
         "t6_graveto":"Imagens/Sprites/movimento_6.png"
     },
     "personagem":{
-        "x":10,
+        "x":1000,
         "y":480,
         "largura":115,
         "altura":115

@@ -104,10 +104,9 @@ class Jogo {
             
             for (let inimigo of inimigos) {
                 inimigo.mover(breu);
-                inimigo.desenhar();
+                
             }
         breu.desenhar();
-        console.log(inimigos)
         pop();
     }
 

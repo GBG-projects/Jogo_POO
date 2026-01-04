@@ -14,7 +14,7 @@ class Personagem extends ModeloBase {
     this.inventario = [];
     this.gravetoPego = false;
     this.estado = "parado";
-    
+    this.escondido = false;
     this.spritesFrente = spritesBreuFrente;
     this.spritesTras = spritesBreuTras;
     this.spritesFrenteComGraveto = spritesBreuFrenteGraveto;

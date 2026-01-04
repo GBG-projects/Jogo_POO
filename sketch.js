@@ -31,11 +31,11 @@ let spritesBreuFrente = [];
 let spritesBreuTras = [];
 let spritesBreuFrenteGraveto = [];
 let spritesBreuTrasGraveto = [];
-
+let spritesLesmaTras = [];
+let spritesLesmaFrente = [];
 function preload() { 
   meuJson = loadJSON("jogo.json");
 
-  
 
 }
 
@@ -66,7 +66,15 @@ function setup() {
     loadImage(meuJson.Sprites.t6_graveto)
   ];
 
-
+  spritesLesmaTras = [
+    loadImage(meuJson.Cenarios.vagao1.inimigos.lesma1.img),
+    loadImage(meuJson.Cenarios.vagao1.inimigos.lesma1.img2)
+  ]
+  spritesLesmaFrente = [
+    loadImage(meuJson.Cenarios.vagao1.inimigos.lesma1.img3),
+    loadImage(meuJson.Cenarios.vagao1.inimigos.lesma1.img4),
+ 
+  ]
   
   puxarCenario();
   let objPersonagem = PegarInfoPersonagem();
@@ -381,7 +389,10 @@ function carregarEstruturasDaFase(fase) {
     
     if(fase == 3){
       estruturas.push(bancoMulher, bancoGordo, bancoHomem, bancoVazio)
-  }
+    }
+  if(fase == 4){
+     estruturas.push(bancoMulher, bancoGordo, bancoHomem, bancoVazio)
+    }
   if(fase == 6) {
     let portaJSON = meuJson.Cenarios.vagaoSaida.estruturas.porta;
   }
@@ -491,5 +502,15 @@ function carregarInimigos(fase){
       true
     )
     inimigos.push(lesma1)
+  }
+  if( fase == 4){
+    let cozinheirJSON = meuJson.Cenarios.vagao2.inimigos.cozinheiro;
+    
+    let cozinheiro = new Cozinheiro(
+      cozinheirJSON.x, cozinheirJSON.y,
+      cozinheirJSON.largura, cozinheirJSON.altura,
+      cozinheirJSON.img
+    )
+    inimigos.push(cozinheiro)
   }
 }
